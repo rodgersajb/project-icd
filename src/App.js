@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import UserSelect from "./UserSelect";
+import UserSelect from "./Components/UserSelect";
+import CreatedLists from "./Components/CreatedLists";
+import firebase from "./firebase";
 
 // Get Api call for genres and its id
 // pass time options and genres/id as props to UserSelect Component
@@ -30,6 +32,7 @@ function App() {
   return (
     <div className="App">
       <UserSelect genreOptions={genreOptions} />
+      <CreatedLists />
     </div>
   );
 }
