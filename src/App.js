@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import UserSelect from "./Components/UserSelect";
 import CreatedLists from "./Components/CreatedLists";
-import firebase from "./firebase";
 
 // Get Api call for genres and its id
 // pass time options and genres/id as props to UserSelect Component
@@ -11,9 +10,10 @@ import firebase from "./firebase";
 
 function App() {
   const [genreOptions, setGenreOptions] = useState([]);
+
   // const [genreId, setGenreId] = useState(0)
 
-  const apiKey = "a5e87382f2c41fc47e2facb317187475";
+  // const apiKey = "a5e87382f2c41fc47e2facb317187475";
 
   useEffect(() => {
     // const url = new URL("https://api.themoviedb.org/3//genre/movie/list");

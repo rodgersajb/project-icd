@@ -19,8 +19,6 @@ function UserSelect({ genreOptions }) {
     setCanSubmit(time > 0 && currentGenre > 0);
   }, [currentGenre, time]);
 
-  console.log(time);
-
   return (
     <>
       <form action="">

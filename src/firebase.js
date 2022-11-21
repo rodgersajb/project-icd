@@ -5,11 +5,11 @@ import { initializeApp } from "firebase/app";
 // *** USE YOUR CONFIG OBJECT ***
 const config = {
   apiKey: "AIzaSyDkcaE9euQ2kRAbmAMUi9PSeNsmNdd4hGM",
-  authDomain: "bookshelf-8d68a.firebaseapp.com",
-  databaseURL: "https://bookshelf-8d68a.firebaseio.com",
-  projectId: "bookshelf-8d68a",
-  storageBucket: "bookshelf-8d68a.appspot.com",
-  messagingSenderId: "548100999451",
+  authDomain: "i-cannot.firebaseapp.com",
+  projectId: "i-cannot",
+  storageBucket: "i-cannot.appspot.com",
+  messagingSenderId: "634518438257",
+  appId: "1:634518438257:web:5d8e113ae110d9a2d536d0",
 };
 
 // setting a variable that initializes our application
