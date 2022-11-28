@@ -1,32 +1,37 @@
 import { useState, useEffect } from "react";
 import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 import firebase from "../firebase";
+import UserSelect from "./UserSelect";
 
-const CreatedLists = () => {
+const CreatedLists = ({listOptions}) => {
+
+console.log({listOptions});
   const [lists, setLists] = useState([]);
   const [listName, setListName] = useState("");
   const [userCanSubmit, setUserCanSubmit] = useState(false);
   const minListName = 3;
   const maxListName = 20;
 
-  useEffect(() => {
-    // database details
-    const database = getDatabase(firebase);
-    // database details stored in variable
-    const dbRef = ref(database);
+  console.log(listName,)
 
-    onValue(dbRef, (response) => {
-      const newState = [];
+    useEffect(() => {
+      // database details
+      const database = getDatabase(firebase);
+      // database details stored in variable
+      const dbRef = ref(database);
 
-      const data = response.val();
+      onValue(dbRef, (response) => {
+        const newState = [];
 
-      for (let key in data) {
-        newState.push({ key: key, name: data[key] });
-      }
+        const data = response.val();
 
-      setLists(newState);
-    });
-  }, []);
+        for (let key in data) {
+          newState.push({ key: key, name: data[key] });
+        }
+
+        setLists(newState);
+      });
+    }, []);
 
   useEffect(() => {
     setUserCanSubmit(
@@ -84,9 +89,7 @@ const CreatedLists = () => {
           {lists.map((list, index) => {
             return (
               <li key={list.key}>
-                <p>
-                  {list.name} - {list.key}
-                </p>
+                <p>{list.name}</p>
                 <button onClick={() => handleListRemove(list.key)}>
                   {" "}
                   Remove{" "}

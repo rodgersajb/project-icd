@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// import CreatedLists from "./CreatedLists";
 
 function UserSelect({ genreOptions }) {
   const [canSubmit, setCanSubmit] = useState(false);
@@ -9,7 +10,7 @@ function UserSelect({ genreOptions }) {
   const handleOnSubmit = (event) => {
     event.preventDefault();
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?with_genres=${currentGenre}&with_runtine.lte=${time}include_video=true&include_adult=true&api_key=a5e87382f2c41fc47e2facb317187475`
+      `https://api.themoviedb.org/3/discover/movie?with_genres=${currentGenre}&with_runtine.lte=${time}include_video=true&include_adult=false&api_key=a5e87382f2c41fc47e2facb317187475`
     )
       .then((response) => response.json())
       .then((data) => setResults(data.results));
@@ -43,7 +44,7 @@ function UserSelect({ genreOptions }) {
           <option value="900">All the time in the World</option>
         </select>
         <button onClick={handleOnSubmit} disabled={!canSubmit}>
-          HEY JIN
+          FIND ME MOVIES
         </button>
       </form>
       {results.length > 0 && (
@@ -58,7 +59,10 @@ function UserSelect({ genreOptions }) {
                 />
                 <p>{result.overview}</p>
                 <p></p>
-                <button>ADD</button>
+                <label htmlFor="add-to-list">Add to</label>
+                <select name="created-lists" id="">
+                  <option value="">--Add Movie--</option>
+                </select>
               </li>
             );
           })}

@@ -11,6 +11,7 @@ import Footer from "./Components/Footer";
 
 function App() {
   const [genreOptions, setGenreOptions] = useState([]);
+  
 
   // const [genreId, setGenreId] = useState(0)
 
@@ -29,6 +30,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => setGenreOptions(data.genres));
   }, []);
+
 
   return (
     <div className="App">
