@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getDatabase, ref, onValue, push, remove } from "firebase/database";
 import firebase from "../firebase";
-import UserSelect from "./UserSelect";
+import { ListContext } from "../Contexts/ListContext";
 
-const CreatedLists = ({listOptions}) => {
 
-console.log({listOptions});
-  const [lists, setLists] = useState([]);
-  const [listName, setListName] = useState("");
+const CreatedLists = () => {
+
+    const { lists, setLists, listName, setListName} = useContext(ListContext);
+
+
+//   const [lists, setLists] = useState([]);
+//   const [listName, setListName] = useState("");
   const [userCanSubmit, setUserCanSubmit] = useState(false);
   const minListName = 3;
   const maxListName = 20;
@@ -31,7 +34,7 @@ console.log({listOptions});
 
         setLists(newState);
       });
-    }, []);
+    }, [setLists]);
 
   useEffect(() => {
     setUserCanSubmit(

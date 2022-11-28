@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ListContext } from "../Contexts/ListContext";
 // import CreatedLists from "./CreatedLists";
 
 function UserSelect({ genreOptions }) {
+  const { lists, listName } = useContext(ListContext);
+
+  console.log(lists, "HEY");
   const [canSubmit, setCanSubmit] = useState(false);
   const [currentGenre, setCurrentGenre] = useState(0);
   const [results, setResults] = useState([]);
@@ -62,6 +66,9 @@ function UserSelect({ genreOptions }) {
                 <label htmlFor="add-to-list">Add to</label>
                 <select name="created-lists" id="">
                   <option value="">--Add Movie--</option>
+                  {lists.map((list) => {
+                    return <option value={list.key}>{list.name}</option>;
+                  })}
                 </select>
               </li>
             );

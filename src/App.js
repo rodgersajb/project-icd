@@ -3,6 +3,7 @@ import "./App.css";
 import UserSelect from "./Components/UserSelect";
 import CreatedLists from "./Components/CreatedLists";
 import Footer from "./Components/Footer";
+import { ListContext } from "./Contexts/ListContext";
 
 // Get Api call for genres and its id
 // pass time options and genres/id as props to UserSelect Component
@@ -11,7 +12,8 @@ import Footer from "./Components/Footer";
 
 function App() {
   const [genreOptions, setGenreOptions] = useState([]);
-  
+  const [lists, setLists] = useState([]);
+  const [listName, setListName] = useState("");
 
   // const [genreId, setGenreId] = useState(0)
 
@@ -31,11 +33,12 @@ function App() {
       .then((data) => setGenreOptions(data.genres));
   }, []);
 
-
   return (
     <div className="App">
-      <UserSelect genreOptions={genreOptions} />
-      <CreatedLists />
+      <ListContext.Provider value={{ lists, setLists, listName, setListName}}>
+        <UserSelect genreOptions={genreOptions} />
+        <CreatedLists />
+      </ListContext.Provider>
       <Footer />
     </div>
   );
