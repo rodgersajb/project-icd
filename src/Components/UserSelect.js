@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ListContext } from "../Contexts/ListContext";
+import MovieSearchItem from "./MovieSearchItem";
+
 // import CreatedLists from "./CreatedLists";
 
 function UserSelect({ genreOptions }) {
-  const { lists, listName } = useContext(ListContext);
+  const { lists } = useContext(ListContext);
 
   console.log(lists, "HEY");
   const [canSubmit, setCanSubmit] = useState(false);
@@ -55,22 +57,11 @@ function UserSelect({ genreOptions }) {
         <ul>
           {results.map((result, index) => {
             return (
-              <li key={index}>
-                <h2>{result.title}</h2>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500/${result.poster_path}`}
-                  alt={result.overview}
-                />
-                <p>{result.overview}</p>
-                <p></p>
-                <label htmlFor="add-to-list">Add to</label>
-                <select name="created-lists" id="">
-                  <option value="">--Add Movie--</option>
-                  {lists.map((list) => {
-                    return <option value={list.key}>{list.name}</option>;
-                  })}
-                </select>
-              </li>
+              <MovieSearchItem
+                movie={result}
+                index={index}
+                listChoices={lists}
+              />
             );
           })}
         </ul>
