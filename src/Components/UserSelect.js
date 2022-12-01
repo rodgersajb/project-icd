@@ -2,12 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { ListContext } from "../Contexts/ListContext";
 import MovieSearchItem from "./MovieSearchItem";
 
-// import CreatedLists from "./CreatedLists";
-
 function UserSelect({ genreOptions }) {
   const { lists } = useContext(ListContext);
 
-  console.log(lists, "HEY");
   const [canSubmit, setCanSubmit] = useState(false);
   const [currentGenre, setCurrentGenre] = useState(0);
   const [results, setResults] = useState([]);
@@ -25,6 +22,8 @@ function UserSelect({ genreOptions }) {
   useEffect(() => {
     setCanSubmit(time > 0 && currentGenre > 0);
   }, [currentGenre, time]);
+
+  
 
   return (
     <>

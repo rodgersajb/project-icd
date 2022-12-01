@@ -12,7 +12,7 @@ import { ListContext } from "./Contexts/ListContext";
 
 function App() {
   const [genreOptions, setGenreOptions] = useState([]);
-  const [lists, setLists] = useState([]);
+  const [lists, setLists] = useState([{}]);
   const [listName, setListName] = useState("");
 
   // const [genreId, setGenreId] = useState(0)
@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <ListContext.Provider value={{ lists, setLists, listName, setListName}}>
+      <ListContext.Provider value={{ lists, setLists, listName, setListName }}>
         <UserSelect genreOptions={genreOptions} />
         <CreatedLists />
       </ListContext.Provider>

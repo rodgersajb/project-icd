@@ -1,40 +1,33 @@
 import { useState, useEffect, useContext } from "react";
-import { getDatabase, ref, onValue, push, remove } from "firebase/database";
-import firebase from "../firebase";
+import { ref, onValue, push, remove } from "firebase/database";
+import database from "../firebase";
 import { ListContext } from "../Contexts/ListContext";
 
-
 const CreatedLists = () => {
+  const { lists, setLists, listName, setListName } = useContext(ListContext);
 
-    const { lists, setLists, listName, setListName} = useContext(ListContext);
-
-
-//   const [lists, setLists] = useState([]);
-//   const [listName, setListName] = useState("");
+  //   const [lists, setLists] = useState([]);
+  //   const [listName, setListName] = useState("");
   const [userCanSubmit, setUserCanSubmit] = useState(false);
   const minListName = 3;
   const maxListName = 20;
 
-  console.log(listName,)
+  useEffect(() => {
+    // database details stored in variable
+    const dbRef = ref(database);
 
-    useEffect(() => {
-      // database details
-      const database = getDatabase(firebase);
-      // database details stored in variable
-      const dbRef = ref(database);
+    onValue(dbRef, (response) => {
+      const newState = [];
 
-      onValue(dbRef, (response) => {
-        const newState = [];
+      const data = response.val();
 
-        const data = response.val();
+      for (let key in data) {
+        newState.push({ key: key, name: data[key] });
+      }
 
-        for (let key in data) {
-          newState.push({ key: key, name: data[key] });
-        }
-
-        setLists(newState);
-      });
-    }, [setLists]);
+      setLists(newState);
+    });
+  }, [setLists]);
 
   useEffect(() => {
     setUserCanSubmit(
@@ -47,8 +40,6 @@ const CreatedLists = () => {
     // reference firebase and then push whatever is dynamically created to firebase
     event.preventDefault();
 
-    //reference to firebase
-    const database = getDatabase(firebase);
     //firebase reference stored in variable
     const dbRef = ref(database);
 
@@ -66,7 +57,6 @@ const CreatedLists = () => {
   // reference database and create a remove lists button when lists are created
 
   const handleListRemove = (listId) => {
-    const database = getDatabase(firebase);
     const dbRef = ref(database, `/${listId}`);
     remove(dbRef);
   };
@@ -89,7 +79,7 @@ const CreatedLists = () => {
       </form>
       {lists.length > 0 && (
         <ul>
-          {lists.map((list, index) => {
+          {lists.map((list) => {
             return (
               <li key={list.key}>
                 <p>{list.name}</p>

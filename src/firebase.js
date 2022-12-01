@@ -1,5 +1,6 @@
 // firebase.js
 import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 
 // Initialize Firebase
 // *** USE YOUR CONFIG OBJECT ***
@@ -14,5 +15,7 @@ const config = {
 
 // setting a variable that initializes our application
 const firebase = initializeApp(config);
+const database = getDatabase(firebase);
 // this exports the CONFIGURED version of firebase
-export default firebase;
+
+export default database;
