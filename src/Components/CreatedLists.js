@@ -22,7 +22,7 @@ const CreatedLists = () => {
       const data = response.val();
 
       for (let key in data) {
-        newState.push({ key: key, name: data[key] });
+        newState.push({ key: key, ...data[key] });
       }
 
       setLists(newState);
@@ -45,7 +45,7 @@ const CreatedLists = () => {
 
     //PUSH
 
-    push(dbRef, listName);
+    push(dbRef, { name: listName });
 
     setListName("");
   };
@@ -80,6 +80,7 @@ const CreatedLists = () => {
       {lists.length > 0 && (
         <ul>
           {lists.map((list) => {
+            console.log(list, "HEY JINNNN");
             return (
               <li key={list.key}>
                 <p>{list.name}</p>

@@ -22,22 +22,6 @@ function MovieSearchItem(props) {
     setSelectedList(event.target.value);
   };
 
-  // const movieData = {
-  //   title: `${props.movie.original_title}`,
-
-  //   overview: `${props.movie.overview}`,
-  // };
-
-  // console.log(`${props.movie.original_title}`, "DID THIS WORK");
-
-  // useEffect(() => {
-  //   const dbListRef = ref(database, "props.listName");
-  //   onValue(dbListRef, (snapshot) => {
-  //     const data = snapshot.val();
-  //     const listAdd = data ? Object.values(data) : [];
-  //     setSelectedMovie(listAdd);
-  //   });
-  // }, [selectedMovie]);
 
   useEffect(() => {
     const dbMovieRef = ref(database, `/${selectedList}`);
@@ -62,41 +46,11 @@ function MovieSearchItem(props) {
 
   const handleOnSubmitChange = (event) => {
     event.preventDefault();
-    const listRef = ref(database, `props.listName/${selectedList}/`);
-    console.log(listRef, "LIST REF");
-    update(listRef, {
-      title: props.movie.original_title,
-      overview: props.movie.overview,
-    });
+    const movieRef = ref(database, `/${selectedList}/movies/${props.movie.id}`);
+    console.log(movieRef, "LIST REF");
+    update(movieRef, props.movie);
   };
 
-  // const handleOnSubmitChange = (event) => {
-  //   // event.preventDefault();
-  //   const dbListRef = ref(database, `/${selectedList}`);
-  //   onValue(dbListRef, (snapshot) => {
-  //     const data = snapshot.val();
-  //     console.log(data);
-  //   });
-  // };
-
-  // const handleOnSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   // onValue(dbListRef, (response) => {
-  //   //   const data = response.val();
-  //   //   data.push(movieData);
-  //   // });
-  //   // console.log(dbListRef);
-  // };
-
-  // const addToList = (event) => {
-  //   event.preventDefault();
-  //   const listRef = ref(database, `/${selectedList}/`);
-  //   push(listRef, {
-  //     title: props.movie.original_title,
-  //     overview: props.movie.overview,
-  //   });
-  // };
 
   return (
     <>
